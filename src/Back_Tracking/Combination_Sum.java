@@ -50,19 +50,18 @@ public class Combination_Sum {
 
     public static void recursive_call(int[] candidates, int target, int index, List<Integer> list) {
 
-        if (target == 0) {
-            res.add(new ArrayList<>(list));
+        if(index == candidates.length) {
+            if (target == 0)
+                res.add(new ArrayList<>(list));
             return;
         }
 
-        if (target > 0) {
-            // since the same number can taken any number of times
-            for (int i = index; i < candidates.length; i++) {
-                list.add(candidates[i]);
-                recursive_call(candidates, target - candidates[i], i, list);
-                list.remove(list.size() - 1);
-            }
+        if(candidates[index] <= target) {
+            list.add(candidates[index]);
+            recursive_call(candidates, target - candidates[index], index, list);
+            list.remove(list.size() - 1);
         }
+        recursive_call(candidates, target, index + 1, list);
 
     }
 
